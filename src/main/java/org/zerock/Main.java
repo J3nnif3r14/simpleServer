@@ -1,17 +1,29 @@
 package org.zerock;
 
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String[] args) throws Exception{
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+
+        ServerSocket   serverSocket = new ServerSocket(9000);
+        System.out.println(serverSocket);
+
+
+        Socket client = serverSocket.accept();
+        System.out.println(client);
+
+        InputStream inputStream = client.getInputStream();
+        Scanner clientScanner  = new Scanner(inputStream);
+
+        String line = clientScanner.nextLine();
+
+        System.out.println(line);
+
     }
 }
